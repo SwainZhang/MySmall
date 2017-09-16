@@ -1,0 +1,34 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'net.wequick.tools.build:gradle-small:1.1.0-alpha2'
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+apply plugin: 'net.wequick.small'
+small {
+     //Small AAR 库版本。用于指定maven依赖 net.wequick.small:small:$aarVersion，该依赖将被自动添加到宿主即各个插件模块中。
+    aarVersion = '1.1.0-alpha2'
+    //是否严格分离资源。默认为 true ，即不允许插件模块携带包含资源的第三方库。
+    //strictSplicResources = false
+    //是否将插件作为 apk文件 打包到宿主apk的 assets 目录下。默认为 false ，即作为 so文件 打包到宿主apk的 lib 目录下。配套的，你需要在宿主的 Application 里指定是否从 assets 读取插件：
+    buildToAssets = true
+    //
+
+}
